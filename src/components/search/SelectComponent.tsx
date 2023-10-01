@@ -1,10 +1,10 @@
-import type { PropFunction} from "@builder.io/qwik";
+import type { PropFunction } from "@builder.io/qwik";
 import { component$ } from "@builder.io/qwik";
 
 interface SelectProps {
   options: any[];
   value: any;
-  onChange: PropFunction<() => void>;
+  onChange: PropFunction<(e: any) => void>;
   placeholder: string;
 }
 

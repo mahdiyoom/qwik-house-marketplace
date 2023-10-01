@@ -55,6 +55,19 @@ export default component$(() => {
 
   // todo 1:  function to handle form submit
   const handleSubmitForm = $(() => {
+    if (
+      !purpose.amount ||
+      !price.amount ||
+      !rooms.amount ||
+      !title.amount ||
+      !baths.amount ||
+      !area.amount ||
+      !name.amount ||
+      !description.amount ||
+      !type.amount ||
+      !refurnishedStatus.amount
+    )
+      return;
     const addHome = $(() => {
       const newHome = {
         data: {
@@ -86,35 +99,6 @@ export default component$(() => {
     });
     addHome();
     alert("the home added successfully!");
-
-    /*  if (
-      price.amount === 0 ||
-      rooms.amount === 0 ||
-      baths.amount === 0 ||
-      area.amount === 0 ||
-      purpose.amount === "" ||
-      rentFrequency.amount === "" ||
-      title.amount === "" ||
-      name.amount === "" ||
-      description.amount === "" ||
-      type.amount === "" ||
-      refurnishedStatus.amount === ""
-    ) {
-      alert("please fill all the fields to submit!");
-      return;
-    } */
-    /* 
-    price.amount = 10000;
-    rooms.amount = 4;
-    baths.amount = 3;
-    area.amount = 8000;
-    purpose.amount = "";
-    rentFrequency.amount = "";
-    title.amount = "";
-    name.amount = "";
-    description.amount = "";
-    type.amount = "";
-    refurnishedStatus.amount = ""; */
   });
   return (
     <form
@@ -158,7 +142,7 @@ export default component$(() => {
           placeholder="for-rent"
           value={purpose.amount}
           onChange$={(e) => {
-            purpose.amount = e?.target?.value;
+            purpose.amount = e.target.value;
           }}
         />
       </div>
@@ -230,7 +214,7 @@ export default component$(() => {
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           value={title.amount}
           onChange$={(e) => {
-            title.amount = e?.target?.value;
+            title.amount = e.target.value;
           }}
         />
       </div>

@@ -1,4 +1,4 @@
-export const baseUrl = "https://strapi-demo-app-217n.onrender.com";
+export const baseUrl = "https://real-state-db.onrender.com";
 
 export const fetchApi = async (url) => {
   const response = await fetch(url);

@@ -2,7 +2,7 @@ import { component$ } from "@builder.io/qwik";
 
 export const Loader = component$(() => {
   return (
-    <div role="status">
+    <div role="status" style={{ marginTop: "20px", marginLeft: "20px" }}>
       <svg
         aria-hidden="true"
         class="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"

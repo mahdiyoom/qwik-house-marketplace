@@ -9,15 +9,16 @@ import { baseUrl, fetchApi } from "~/components/utils/fetchAPI";
 import { Loader } from "../../components/common/Loader";
 import { Property } from "~/components/common/property";
 import axios from "axios";
+import { ErrorPage } from "~/components/common/Error/ErrorPage";
 
 export default component$(() => {
   const sale = useSignal([]);
   // fetching the homes for sale
-  const buyHome = useResource$(async ({ cleanup }) => {
+  const buyHome = useResource$(async ({ cleanup, track }) => {
     const controller = new AbortController();
     cleanup(() => controller.abort());
     const saleValue = await fetchApi(
-      `${baseUrl}/api/homes?filters[purpose]=for-sale&populate=*`
+      `${baseUrl}/api/homes?filters[purpose]=for-sale&populate=*&pagination[page]=1&pagination[pageSize]=3100`
     );
     sale.value = saleValue;
     return sale.value;
@@ -35,6 +36,7 @@ export default component$(() => {
       <Resource
         value={buyHome}
         onPending={() => <Loader />}
+        onRejected={() => <ErrorPage />}
         onResolved={(sale) => {
           return (
             <div class="flex flex-wrap">

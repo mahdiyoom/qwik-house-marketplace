@@ -9,14 +9,15 @@ import { baseUrl, fetchApi } from "~/components/utils/fetchAPI";
 import { Property } from "~/components/common/property";
 import { Loader } from "~/components/common/Loader";
 import axios from "axios";
+import { ErrorPage } from "~/components/common/Error/ErrorPage";
 
 export default component$(() => {
   const rent = useSignal([]);
-  const rentHome = useResource$(async ({ cleanup }) => {
+  const rentHome = useResource$(async ({ cleanup, track }) => {
     const controller = new AbortController();
     cleanup(() => controller.abort());
     const rentValue = await fetchApi(
-      `${baseUrl}/api/homes?filters[purpose]=for-rent&populate=*`
+      `${baseUrl}/api/homes?filters[purpose]=for-rent&populate=*&pagination[page]=1&pagination[pageSize]=3100`
     );
     rent.value = rentValue;
     return rent.value;
@@ -37,6 +38,7 @@ export default component$(() => {
       <Resource
         value={rentHome}
         onPending={() => <Loader />}
+        onRejected={() => <ErrorPage />}
         onResolved={(rent) => {
           return (
             <div class="flex flex-wrap">
