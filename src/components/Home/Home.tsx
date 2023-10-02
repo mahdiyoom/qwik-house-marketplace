@@ -1,47 +1,21 @@
-import {
-  $,
-  Resource,
-  component$,
-  useResource$,
-  useSignal,
-  useStore,
-} from "@builder.io/qwik";
+import { $, component$, useSignal } from "@builder.io/qwik";
 import { Banner } from "./Banner";
-// import { usePropertyForRentDetails, usePropertyForSaleDetails } from "~/routes";
 import { Property } from "../common/property";
 import axios from "axios";
-import { baseUrl, fetchApi } from "../utils/fetchAPI";
-import { Loader } from "../common/Loader";
+import { baseUrl } from "../utils/fetchAPI";
 import { ErrorPage } from "../common/Error/ErrorPage";
+import { useRent, useSale } from "~/routes";
 
 export const Home = component$(() => {
-  const rent = useStore({ amount: [] });
-  const sale = useStore({ amount: [] });
-
-  const rentHome = useResource$(async ({ cleanup }) => {
-    const controller = new AbortController();
-    cleanup(() => controller.abort());
-    const rentValue = await fetchApi(
-      `${baseUrl}/api/homes?filters[purpose]=for-rent&populate=*`
-    );
-    rent.amount = rentValue;
-    return rent.amount;
-  });
-
-  const buyHome = useResource$(async ({ cleanup }) => {
-    const controller = new AbortController();
-    cleanup(() => controller.abort());
-    const saleValue = await fetchApi(
-      `${baseUrl}/api/homes?filters[purpose]=for-sale&populate=*`
-    );
-    sale.amount = saleValue;
-    return sale.amount;
-  });
+  const rentValue = useRent();
+  const saleValue = useSale();
+  const rent = useSignal(rentValue.value);
+  const sale = useSignal(saleValue.value);
 
   // delete a home
   const deleteHome = $((home: any) => {
-    rent.amount = rent?.amount?.filter((u: any) => u.id !== home.id);
-    sale.amount = sale?.amount?.filter((u: any) => u.id !== home.id);
+    rent.value = rent?.value?.filter((u: any) => u.id !== home.id);
+    sale.value = sale?.value?.filter((u: any) => u.id !== home.id);
     axios
       .delete(`${baseUrl}/api/homes/${home.id}`)
       .catch((err) => console.log(err.message));
@@ -59,25 +33,16 @@ export const Home = component$(() => {
         linkName="/rent"
         imageUrl="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=600"
       />
-      <Resource
-        value={rentHome}
-        onPending={() => <Loader />}
-        onRejected={() => <ErrorPage />}
-        onResolved={(rent) => {
-          return (
-            <div class="flex flex-wrap">
-              {rent?.map((property: any) => (
-                <Property
-                  property={property}
-                  key={property.id}
-                  onDeleteHome={deleteHome}
-                />
-              ))}
-            </div>
-          );
-        }}
-      />
-
+      {!rentValue.value && <ErrorPage />}
+      <div class="flex flex-wrap items-center justify-center lg:items-start lg:justify-start">
+        {rent.value?.map((property: any) => (
+          <Property
+            property={property}
+            key={property.id}
+            onDeleteHome={deleteHome}
+          />
+        ))}
+      </div>
       <Banner
         purpose="BUY A HOME"
         title1="Find, Buy and Own Your"
@@ -88,24 +53,16 @@ export const Home = component$(() => {
         linkName="/sale"
         imageUrl="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=600"
       />
-      <Resource
-        value={buyHome}
-        onPending={() => <Loader />}
-        onRejected={() => <ErrorPage />}
-        onResolved={(sale) => {
-          return (
-            <div class="flex flex-wrap">
-              {sale?.map((property: any) => (
-                <Property
-                  property={property}
-                  key={property.id}
-                  onDeleteHome={deleteHome}
-                />
-              ))}
-            </div>
-          );
-        }}
-      />
+      {!saleValue.value && <ErrorPage />}
+      <div class="flex flex-wrap items-center justify-center lg:items-start lg:justify-start">
+        {sale.value?.map((property: any) => (
+          <Property
+            property={property}
+            key={property.id}
+            onDeleteHome={deleteHome}
+          />
+        ))}
+      </div>
     </div>
   );
 });

@@ -140,7 +140,7 @@ export default component$(() => {
         onRejected={() => <ErrorPage />}
         onResolved={(property) => (
           <>
-            <div class="flex flex-wrap mt-8">
+            <div class="flex flex-wrap mt-8 items-center justify-center lg:items-start lg:justify-start">
               {property
                 ?.filter(
                   (item: any) =>

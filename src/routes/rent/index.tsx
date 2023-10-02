@@ -1,27 +1,19 @@
-import {
-  $,
-  Resource,
-  component$,
-  useResource$,
-  useSignal,
-} from "@builder.io/qwik";
+import { $, component$, useSignal } from "@builder.io/qwik";
 import { baseUrl, fetchApi } from "~/components/utils/fetchAPI";
 import { Property } from "~/components/common/property";
-import { Loader } from "~/components/common/Loader";
 import axios from "axios";
 import { ErrorPage } from "~/components/common/Error/ErrorPage";
+import { routeLoader$ } from "@builder.io/qwik-city";
 
+export const useRent = routeLoader$(async () => {
+  const rentValue = await fetchApi(
+    `${baseUrl}/api/homes?filters[purpose]=for-rent&populate=*&pagination[page]=1&pagination[pageSize]=3100`
+  );
+  return rentValue;
+});
 export default component$(() => {
-  const rent = useSignal([]);
-  const rentHome = useResource$(async ({ cleanup, track }) => {
-    const controller = new AbortController();
-    cleanup(() => controller.abort());
-    const rentValue = await fetchApi(
-      `${baseUrl}/api/homes?filters[purpose]=for-rent&populate=*&pagination[page]=1&pagination[pageSize]=3100`
-    );
-    rent.value = rentValue;
-    return rent.value;
-  });
+  const rentValue = useRent();
+  const rent = useSignal(rentValue.value);
 
   // delete a home
 
@@ -33,26 +25,19 @@ export default component$(() => {
   });
   return (
     <>
-      <h1 class="text-3xl m-4 font-bold">Properties for Rent</h1>
-
-      <Resource
-        value={rentHome}
-        onPending={() => <Loader />}
-        onRejected={() => <ErrorPage />}
-        onResolved={(rent) => {
-          return (
-            <div class="flex flex-wrap">
-              {rent?.map((property: any) => (
-                <Property
-                  property={property}
-                  key={property.id}
-                  onDeleteHome={deleteHome}
-                />
-              ))}
-            </div>
-          );
-        }}
-      />
+      <h1 class="lg:text-3xl text-2xl m-6 mb-8 font-bold text-center md:text-left">
+        Properties for Rent
+      </h1>
+      {!rentValue.value && <ErrorPage />}
+      <div class="flex flex-wrap items-center justify-center lg:items-start lg:justify-start">
+        {rent.value?.map((property: any) => (
+          <Property
+            property={property}
+            key={property.id}
+            onDeleteHome={deleteHome}
+          />
+        ))}
+      </div>
     </>
   );
 });

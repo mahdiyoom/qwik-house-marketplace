@@ -3,7 +3,6 @@ import { routeLoader$ } from "@builder.io/qwik-city";
 import type { RequestHandler } from "@builder.io/qwik-city";
 
 import styles from "./styles.css?inline";
-
 import { Footer } from "~/components/common/footer/Footer";
 import Header from "~/components/common/header/Header";
 
