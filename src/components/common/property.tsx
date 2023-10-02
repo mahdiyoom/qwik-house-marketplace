@@ -1,4 +1,5 @@
-import { $, PropFunction, component$ } from "@builder.io/qwik";
+import type { PropFunction } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 import millify from "millify";
 import { defaultImages } from "../utils/DefaultImages";

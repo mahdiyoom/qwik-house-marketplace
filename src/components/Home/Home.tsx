@@ -14,8 +14,8 @@ export const Home = component$(() => {
 
   // delete a home
   const deleteHome = $((home: any) => {
-    rent.value = rent?.value?.filter((u: any) => u.id !== home.id);
-    sale.value = sale?.value?.filter((u: any) => u.id !== home.id);
+    rent.value = rent.value?.filter((u: any) => u.id !== home.id);
+    sale.value = sale.value?.filter((u: any) => u.id !== home.id);
     axios
       .delete(`${baseUrl}/api/homes/${home.id}`)
       .catch((err) => console.log(err.message));

@@ -1,4 +1,4 @@
-import { component$, useStyles$, useStylesScoped$ } from "@builder.io/qwik";
+import { component$, useStyles$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 import ErrorPageStyle from "./ErrorPage.css?inline";
 const buttonStyle = {

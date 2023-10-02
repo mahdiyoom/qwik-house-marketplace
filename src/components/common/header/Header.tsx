@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
-import Logo from "/assets/logo2.png";
+import Logo from "../../../../public/assets/logo2.png";
 export default component$(() => {
   return (
     <nav class="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700  shadow-md mb-10">

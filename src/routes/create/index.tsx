@@ -1,5 +1,4 @@
 import { $, component$, useSignal, useStore, useTask$ } from "@builder.io/qwik";
-import { Form } from "@builder.io/qwik-city";
 import axios from "axios";
 import { baseUrl, fetchApi } from "~/components/utils/fetchAPI";
 
@@ -159,7 +158,7 @@ export default component$(() => {
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           value={price.amount}
           onChange$={(e) => {
-            price.amount = +e?.target?.value;
+            price.amount = +e.target.value;
           }}
         />
       </div>
@@ -178,7 +177,7 @@ export default component$(() => {
           placeholder="monthly"
           value={rentFrequency.amount}
           onChange$={(e) => {
-            rentFrequency.amount = e?.target?.value;
+            rentFrequency.amount = e.target.value;
           }}
         />
       </div>
@@ -196,7 +195,7 @@ export default component$(() => {
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           value={rooms.amount}
           onChange$={(e) => {
-            rooms.amount = +e?.target?.value;
+            rooms.amount = +e.target.value;
           }}
         />
       </div>
@@ -232,7 +231,7 @@ export default component$(() => {
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           value={baths.amount}
           onChange$={(e) => {
-            baths.amount = +e?.target?.value;
+            baths.amount = +e.target.value;
           }}
         />
       </div>
@@ -250,7 +249,7 @@ export default component$(() => {
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           value={area.amount}
           onChange$={(e) => {
-            area.amount = +e?.target?.value;
+            area.amount = +e.target.value;
           }}
         />
       </div>
@@ -268,7 +267,7 @@ export default component$(() => {
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           value={name.amount}
           onChange$={(e) => {
-            name.amount = e?.target?.value;
+            name.amount = e.target.value;
           }}
         />
       </div>
@@ -286,7 +285,7 @@ export default component$(() => {
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           value={description.amount}
           onChange$={(e) => {
-            description.amount = e?.target?.value;
+            description.amount = e.target.value;
           }}
         />
       </div>
@@ -305,7 +304,7 @@ export default component$(() => {
           placeholder="furnished"
           value={refurnishedStatus.amount}
           onChange$={(e) => {
-            refurnishedStatus.amount = e?.target?.value;
+            refurnishedStatus.amount = e.target.value;
           }}
         />
       </div>
@@ -324,7 +323,7 @@ export default component$(() => {
           placeholder="villa"
           value={type.amount}
           onChange$={(e) => {
-            type.amount = e?.target?.value;
+            type.amount = e.target.value;
           }}
         />
       </div>

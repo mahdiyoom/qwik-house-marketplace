@@ -73,7 +73,7 @@ export default component$(() => {
 
   // delete a home
   const deleteHome = $((home: any) => {
-    propertyHolder.value = propertyHolder.value?.filter(
+    propertyHolder.value = propertyHolder.value.filter(
       (u: any) => u.id !== home.id
     );
 
@@ -142,7 +142,7 @@ export default component$(() => {
           <>
             <div class="flex flex-wrap mt-8 items-center justify-center lg:items-start lg:justify-start">
               {property
-                ?.filter(
+                .filter(
                   (item: any) =>
                     item.attributes.purpose === purpose.value &&
                     item.attributes.price <= maximumPrice.value &&
@@ -150,7 +150,7 @@ export default component$(() => {
                     item.attributes.room >= rooms.value &&
                     item.attributes.bath >= baths.value
                 )
-                ?.map((pro: any) => (
+                .map((pro: any) => (
                   <Property
                     key={pro.id}
                     property={pro}
@@ -158,14 +158,14 @@ export default component$(() => {
                   />
                 ))}
             </div>
-            {property?.filter(
+            {property.filter(
               (item: any) =>
                 item.attributes.purpose === purpose.value &&
                 item.attributes.price <= maximumPrice.value &&
                 item.attributes.price >= minimumPrice.value &&
                 item.attributes.room >= rooms.value &&
                 item.attributes.bath >= baths.value
-            )?.length === 0 && <SearchNotFound />}
+            ).length === 0 && <SearchNotFound />}
           </>
         )}
       />
