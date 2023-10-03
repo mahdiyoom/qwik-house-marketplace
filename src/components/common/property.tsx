@@ -32,6 +32,7 @@ export const Property = component$(({ property, onDeleteHome }: homeProp) => {
               width={420}
               height={260}
               class="h-[260px] rounded-md"
+              alt="a random image"
             />
           </div>
 

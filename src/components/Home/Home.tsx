@@ -33,7 +33,7 @@ export const Home = component$(() => {
         linkName="/rent"
         imageUrl="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=600"
       />
-      {!rentValue.value && <ErrorPage />}
+      {rentValue.value.errorMessage && <ErrorPage />}
       <div class="flex flex-wrap items-center justify-center lg:items-start lg:justify-start">
         {rent.value?.map((property: any) => (
           <Property
@@ -53,7 +53,7 @@ export const Home = component$(() => {
         linkName="/sale"
         imageUrl="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=600"
       />
-      {!saleValue.value && <ErrorPage />}
+      {saleValue.value.errorMessage && <ErrorPage />}
       <div class="flex flex-wrap items-center justify-center lg:items-start lg:justify-start">
         {sale.value?.map((property: any) => (
           <Property

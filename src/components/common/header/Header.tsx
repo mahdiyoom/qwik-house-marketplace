@@ -9,7 +9,7 @@ export default component$(() => {
           <img
             src={Logo}
             class="h-15 mr-3"
-            alt="Flowbite Logo"
+            alt="Real State Logo"
             width={100}
             height={60}
           />
